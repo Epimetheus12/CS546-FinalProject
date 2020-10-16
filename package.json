@@ -17,5 +17,9 @@
   "bugs": {
     "url": "https://github.com/Epimetheus12/CS546-FinalProject/issues"
   },
-  "homepage": "https://github.com/Epimetheus12/CS546-FinalProject#readme"
+  "homepage": "https://github.com/Epimetheus12/CS546-FinalProject#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongodb": "^3.6.2"
+  }
 }
