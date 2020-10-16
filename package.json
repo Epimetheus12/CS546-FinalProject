@@ -1,0 +1,21 @@
+{
+  "name": "cs_546_final_project",
+  "version": "1.0.0",
+  "description": "video sharing platform",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "seed": "node ./tasks/seed.js",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Epimetheus12/CS546-FinalProject.git"
+  },
+  "author": "Group3: Fangji Liang 10456047, Arham Kazi 10465115, Danping Cai 10456033, Yu Zhou ",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Epimetheus12/CS546-FinalProject/issues"
+  },
+  "homepage": "https://github.com/Epimetheus12/CS546-FinalProject#readme"
+}
