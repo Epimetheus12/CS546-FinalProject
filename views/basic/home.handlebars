@@ -1,0 +1,28 @@
+<main>
+    <div class="header">
+        <div class="homeLogo"> <img src="../../public/img/logo.png" alt="video-sharing-platform"></div>
+        <div class="search_container">
+            <form action="/search" method="POST" class="search">
+                <label for="searchText">Search TV shows:</label>
+                <input type="text" name="searchTerm" placeholder="Search Term" value="{{searchTerm}}"
+                    class="full-width-input" id="searchText" />
+                <button type="submit">Search</button>
+            </form>
+        </div>
+        <div class="nav_container">
+            <div class="login_container">
+                <span onclick="location='\login'">login</span>
+            </div>
+
+            <div class="signup_container">
+                <span onclick="location='\registration'">signup</span>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="video_list_container">
+        <a href="video.id"> <img src="" alt=""></a>
+    </div>
+
+</main>

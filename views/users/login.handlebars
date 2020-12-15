@@ -1,0 +1,83 @@
+
+<main>
+    <div class="header">
+        <a href="/"> <img src="" alt="video_sharing_platform"></a>
+    </div>
+
+    <div class="form-container">
+        <div class="login_container">
+            <form action="/login" method="POST" class="login" id='login-form'>
+            <span>login</span>
+            <div class="username-container">
+                <label for="username">Username:</label>
+                <input type="text" name="username" placeholder="username" value="{{username}}" class="full-width-input"
+                    id="username" />
+            </div>
+            <div id="username_error">
+
+            </div>
+            <div class="password-container">
+                <label for="password">Password:</label>
+                <input type="text" name="password" placeholder="username" value="{{password}}" class="full-width-input"
+                    id="password" />
+            </div>
+            <div id="password_error">
+                <div class="alert alert-danger errorMsg">
+                </div>
+            </div>
+            <div class="button-container">
+                <button type="submit" class="login-button">login</button>
+            </div>
+            
+        </form>
+        </div>
+        
+        <div class="regi_container" hidden>
+            <form action="/registration" method="POST" class="regi" id='regi-form'>
+            <span>login</span>
+            <div class="username-container">
+                <label for="username">Username:</label>
+                <input type="text" name="username" placeholder="username" value="{{username}}" class="full-width-input"
+                    id="username" />
+            </div>
+            <div id="username_error">
+
+            </div>
+
+            <div class="email_container">
+                
+            </div>
+
+            <div class="gender_box">
+                gender
+            </div>
+
+            <div class="password-container">
+                <label for="password">Password:</label>
+                <input type="text" name="password" placeholder="username" value="{{password}}" class="full-width-input"
+                    id="password" />
+            </div>
+
+            <div class="password-container">
+                double_check
+            </div>
+
+            
+            
+            <div id="password_error">
+                <div class="alert alert-danger errorMsg">
+                </div>
+            </div>
+            <div class="button-container">
+                <button type="submit" class="login-button">sign up</button>
+            </div>
+            
+        </form>
+        </div>
+
+        <div id="login_nav_container">
+            <span onclick="">login</span>
+            <span onclick="">signup</span>
+        </div>
+    </div>
+</main>
