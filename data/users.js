@@ -3,7 +3,7 @@ const users = mongoCollections.users;
 const check = require("../common/check");
 
 
-async function create(username, email, passsword, gender) {
+async function create(username, email, passsword, gender, nickname) {
 
     check.args(arguments.length, 4);
     check.isStr(username, "username");
@@ -12,13 +12,15 @@ async function create(username, email, passsword, gender) {
     check.isStr(passsword, "password");
     check.isHashed(passsword, "password");
     check.isGen(gender, "gender");
+    check.isStr(nickname, "nickname");
 
     const userCollection = await users();
 
     let newUser = {
-        username: username,
-        email: email,
+        username: username.toLowerCase(),
+        email: email.toLowerCase(),
         password: passsword,
+        nickname: nickname,
         gender: gender,
         video: [],
         follower: [],
@@ -113,6 +115,21 @@ async function get_attr(id, attr) {
     
     return userGet[attr];
 
+}
+
+async function getByName(name) {
+    check.args(arguments.length, 1);
+    check.isStr(name, "name");
+
+    let newName = name.toLowerCase();
+
+    const userCollection = await users();
+    const userGet = await userCollection.findOne({
+        username: newName
+    });
+
+    if (userGet === null) return null;
+    return userGet;
 }
 
 async function update_personal(id, email, passsword) {
@@ -353,5 +370,6 @@ module.exports = {
     create,
     getAll,
     get,
-    remove
+    remove,
+    getByName
 };
