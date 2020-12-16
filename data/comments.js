@@ -4,11 +4,10 @@ const check = require("../common/check");
 const e = require("express");
 
 
-async function create(authorID, date, details, level) {
+async function create(authorID, details, level) {
 
-    check.args(arguments.length, 4);
+    check.args(arguments.length, 3);
     check.isObjID(authorID, "authorID");
-    check.isDate(date);
     check.isStr(details);
     check.isNum(level);
     check.isLv(level);
@@ -17,7 +16,6 @@ async function create(authorID, date, details, level) {
 
     let newComm = {
         authorID: authorID,
-        date: date,
         details: details,
         level: level,
         like : 0, 
@@ -216,5 +214,6 @@ module.exports = {
     create,
     getAll,
     get,
-    remove
+    remove,
+    update_comments
 };
