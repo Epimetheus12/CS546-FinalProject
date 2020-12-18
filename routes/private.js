@@ -82,7 +82,6 @@ router.post('/', async (req, res) => {
         const password = req.body.password;
         const nickname = req.body.nickname;
 
-        // if check_three_attr_here;
         if(!email && !password && !nickname){
             return res.status(500).render("error", {
                 title: "Error",
