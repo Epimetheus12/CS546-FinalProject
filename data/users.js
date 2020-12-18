@@ -71,18 +71,6 @@ async function get(id) {
     return userGet;
 }
 
-// async function get_id_by_uuid(uuid){
-
-
-//     const userCollection = await users();
-//     const userGet = await userCollection.findOne({
-//         uuid: uuid
-//     });
-//     if (userGet === null) throw `get user by id failed`;
-//     userGet._id = userGet._id.toString();
-//     return userGet._id;
-// }
-
 
 async function remove(id) {
 
