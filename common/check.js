@@ -41,39 +41,7 @@ function checkIsObject(val, variableName) {
     if (Object.prototype.toString.call(val) !== "[object Object]") throw `${variableName || "Provided variable"} is not a object.`;
 }
 
-function checkObjKeysAndValues(val, variableName) {
-    if (Object.keys(val).length === 0) throw `${variableName || "Provided variable"} is empty object.`;
-    if (Object.keys(val).indexOf("authorFirstName") === -1) throw `${variableName || "Provided variable"} doesn't has key:authorFirstName.`;
-    if (Object.keys(val).indexOf("authorLastName") === -1) throw `${variableName || "Provided variable"} doesn't has key:authorLastName.`;
-    checkIsStrAndIsEmpty(val.authorFirstName);
-    checkIsStrAndIsEmpty(val.authorLastName);
-}
 
-// function checkIsValidDate(val, variable){//val is string
-//     let date = new Date(val);
-//     if(isNaN(date.getTime())) throw `please enter date like month/date/year`;
-//     // let valArr = val.split(/\D/);
-//     let valArr = val.split('/');
-//     if(valArr.length !== 3) throw `please use seperator like month/date/year`;
-//     // if(date.getDate() !== valArr[1] && date.getDate() !== valArr[2]) throw ``;
-//     if(date.getDate().toString() !== valArr[1]) throw `this is not a valid date`;
-// }
-
-function checkIsRating(num, variableName) {
-    //is a num a positive integer
-    if (typeof num !== "number") {
-        throw `${variableName || "Provided variable"} is not a number.`;
-    }
-    if (isNaN(num)) {
-        throw `${variableName || "Provided variable"} is NaN.`;
-    }
-    if (num < 1) {
-        throw `${variableName || "Provided variable"} is less than 1.`;
-    }
-    if (num > 5) {
-        throw `${variableName || "Provided variable"} is more than 5.`;
-    }
-}
 
 function checkIsEmail(email, variableName) {
     var pattern= /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
@@ -127,8 +95,6 @@ module.exports = {
     isStrInArr: checkIsArrayWithAtLeastOneStr,
     isObj: checkIsObject,
     isObjID: checkIsObjId,
-    isKandV: checkObjKeysAndValues,
-    isRating: checkIsRating,
     isEmail: checkIsEmail,
     isHashed: checkIsHashed,
     isGen: checKIsGender,
