@@ -6,33 +6,33 @@ const configRoutes = require('./routes');
 const exphbs = require('express-handlebars');
 const session = require('express-session');
 
-const handlebarsInstance = exphbs.create({
-    defaultLayout: 'main',
-    // Specify helpers which are only registered on this instance.
-    helpers: {
-      asJSON: (obj, spacing) => {
-        if (typeof spacing === 'number')
-          return new Handlebars.SafeString(JSON.stringify(obj, null, spacing));
+// const handlebarsInstance = exphbs.create({
+//     defaultLayout: 'main',
+//     // Specify helpers which are only registered on this instance.
+//     // helpers: {
+//     //   asJSON: (obj, spacing) => {
+//     //     if (typeof spacing === 'number')
+//     //       return new Handlebars.SafeString(JSON.stringify(obj, null, spacing));
   
-        return new Handlebars.SafeString(JSON.stringify(obj));
-      }
-    },
-    partialsDir: ['views/partials/']
-  });
+//     //     return new Handlebars.SafeString(JSON.stringify(obj));
+//     //   }
+//     // },
+//     partialsDir: ['views/partials/']
+// });
 
 app.use('/public', static);
+app.use('/files', express.static(__dirname + '/files'));
 app.use(express.json());
 app.use(express.urlencoded({
   extended: true
 }));
-
-app.engine('handlebars', handlebarsInstance.engine);
+app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
 app.use(
   session({
     name: "AuthCookie",
-    secret: "some secret string!",
+    secret: "CS-546-finalProject",
     saveUninitialized: true,
     resave: false,
   })
