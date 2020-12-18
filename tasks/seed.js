@@ -27,6 +27,7 @@ async function addUser() {
 
             await data.commentsData.create(user._id, commentList[i].detail, commentList[i].level);
             
+            
             const video = await data.videosData.create(user._id, allFile[i], path, allFile[i]);
 
         } catch (e) {
