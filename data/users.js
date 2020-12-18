@@ -5,7 +5,7 @@ const check = require("../common/check");
 
 async function create(username, email, passsword, gender, nickname) {
 
-    check.args(arguments.length, 4);
+    check.args(arguments.length, 5);
     check.isStr(username, "username");
     check.isStr(email, "email");
     check.isEmail(email, "email");
@@ -132,7 +132,7 @@ async function getByName(name) {
     return userGet;
 }
 
-async function update_personal(id, email, passsword) {
+async function update_personal(id, ...info) {
 
     check.args(arguments.length, 2);
     check.isStr(id, "id");
@@ -141,15 +141,20 @@ async function update_personal(id, email, passsword) {
 
     let changeSet = {};
 
-    if(email){
-        check.isStr(email, "email");
-        check.isEmail(email, "email");
-        changeSet.email = email;
+    if(info[0]){
+        check.isStr(info[0], "email");
+        check.isEmail(info[0], "email");
+        changeSet.email = info[0];
     }
-    if(passsword) {
-        check.isStr(passsword, "password");
-        check.isHashed(passsword, "password");
-        changeSet.passsword = passsword;
+    if(info[1]) {
+        check.isStr(info[1], "password");
+        check.isHashed(info[1], "password");
+        changeSet.passsword = info[1];
+    }
+
+    if(info[2]) {
+        check.isStr(info[2], "nickname");
+        changeSet.nickname = info[2];
     }
 
     const userCollection = await users();
@@ -365,11 +370,24 @@ async function update_history(id, history){
     return await get(id);
 }
 
+async function getAllName(){
+    const usersCollection = await users();
+
+    const result = await usersCollection.find({}, { _id: 0, 
+        username: 1,
+        nickname: 1,
+        }).toArray();
+
+    return result;
+}
+
 
 module.exports = {
     create,
     getAll,
     get,
     remove,
-    getByName
+    getByName,
+    update_personal,
+    getAllName
 };

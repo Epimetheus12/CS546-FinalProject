@@ -4,7 +4,7 @@ const check = require("../common/check");
 const e = require("express");
 
 
-async function create(authorID, details, level) {
+async function create(authorID, details, level, parentID) {
 
     check.args(arguments.length, 3);
     check.isObjID(authorID, "authorID");
@@ -21,6 +21,10 @@ async function create(authorID, details, level) {
         like : 0, 
         comments: []
     };
+
+    if(level === 2){
+        newComm.parentID = parentID;
+    }
 
     const insertInfo = await commCollection.insertOne(newComm);
 
@@ -215,5 +219,6 @@ module.exports = {
     getAll,
     get,
     remove,
-    update_comments
+    update_comments,
+    del_comments
 };

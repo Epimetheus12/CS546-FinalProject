@@ -1,19 +1,21 @@
 const mongoCollections = require("../config/mongoCollections");
 const videos = mongoCollections.videos;
 const check = require("../common/check");
+const path = require('path');
 const upPath = "../files/videos/upload/";
 
-const downPath = "../files/videos/download/";
 
-async function create(authorID, title, videoFile, filename) {
+const downPath = process.cwd() + "/files/videos/download/";
+
+async function create(authorID, title, path, filename) {
 
     check.args(arguments.length, 4);
     check.isObjID(authorID, "authorID");
     check.isStr(title, "title");
-    check.isObjID(videoFile, "videoFile");
+    // check.isObjID(videoFile, "videoFile");
     check.isStr(filename);
 
-    let info = await mongoCollections.upload(upPath, filename);
+    let info = await mongoCollections.upload(path, filename);
 
     const videoCollection = await videos();
 
@@ -43,7 +45,8 @@ async function create(authorID, title, videoFile, filename) {
 
 async function download(id){
     let video = await get(id);
-    return await mongoCollections.download(video.videoFile, downPath+video.filename);
+    info =  await mongoCollections.download(video.videoFile, path.resolve(downPath+video.filename));
+    return {path: info, title: video.title, authorID: video.authorID, playedNum: video.playedNum};
 } 
 
 async function getAll() {
@@ -248,10 +251,28 @@ async function del_comments(id, cID){
 
 }
 
+async function getMostLike(){
+    const videoCollection = await videos();
+
+    const mostLike = await videoCollection.find({}, { _id: 1, title: 1,
+        authorID: 0,
+        comments: 0,
+        playedNum: 1,
+        like: 1,
+        videoFile: 0,
+        filename: 0 }).sort({like : -1}).limit(8).toArray();
+
+    return mostLike;
+}
+
+async function getEqualByfield(){}
 
 module.exports = {
     create,
     getAll,
     get,
-    remove
+    remove,
+    update_comments,
+    getMostLike,
+    download
 };
