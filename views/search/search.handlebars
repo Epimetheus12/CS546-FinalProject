@@ -7,7 +7,7 @@
                     <label for="searchText">Search video:</label>
                     <input type="text" name="searchTerm" placeholder="Search Term" value="{{searchTerm}}"
                         class="full-width-input" id="searchText" />
-                    <button type="submit">Search</button>
+                    <button id="searchButt" type="submit">Search</button>
                 </form>
                 <div id="err" class="alert alert-danger errorMsg" hidden>Please type in valid search Term.</div>
             </div>
@@ -27,20 +27,27 @@
             </div>
         </div>
 
-        <div class="video_list_container">
+        <div class="result">
             {{#if data}}
             {{#each data}}
-            <div id={{this._id}} class="video_elements">
-                <a href="video/{{this._id}}"><img src="" alt=""></a>
-                <a href="video/{{this._id}}"> {{this.title}} </a>
-                <p>playedNum: {{this.playedNum}}</p>
+            <div>
+                <a href="video/{{this._id}}" class="video">
+                    <img src="" alt={{this.title}}>
+                </a>
+                <p>
+                    <a href="video/{{this._id}}" class="video">title: {{this.title}}</a>
+                    author: {{this.authorname}}
+                </p>
             </div>
             {{/each}}
             {{else}}
-            <p class="not-found">We're sorry, but no results were found for.</p>
+            <p class="not-found">We're sorry, but no results were found for {{searchTerm}}.</p>
             {{/if}}
         </div>
     </main>
+
+
+
 
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"
         integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
@@ -48,8 +55,8 @@
         integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
         crossorigin="anonymous"></script>
 
-    <script src='../../public/js/check.js'></script>
-    <script src="../../public/js/search.js"></script>
+    <script src='/public/js/check.js'></script>
+    <script src="/public/js/search.js"></script>
 
     <footer class="team_info">
         Team2
