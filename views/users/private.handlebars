@@ -1,0 +1,171 @@
+<body>
+    <main>
+        <div class="header">
+            <div class="homeLogo"> <img src="../../public/img/h_slogan.png" alt="video-sharing-platform"></div>
+            <div class="search_container">
+                <form action="/search" method="POST" class="search" id="searchForm">
+                    <label for="searchText">Search video:</label>
+                    <input type="text" name="searchTerm" placeholder="Search Term" value="{{searchTerm}}"
+                        class="full-width-input" id="searchText" />
+                    <button type="submit">Search</button>
+                </form>
+                <div id="err"class="alert alert-danger errorMsg" hidden>Please type in valid search Term.</div>
+            </div>
+            <div class="nav_container">
+                <div id="about">
+                    <a href="about">about</a>
+                </div>
+                <div id="private" hidden>
+                    <a href="private" name="nickname">Hello, {{nickname}}</a>
+                </div>
+
+                <div id="login" class="login_container">
+                    <a href="login">login/signup</a>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="main_container">
+    <div class="left_container">
+        <div id="person_information">
+            <span>Personal Information</span>
+        </div>
+        <div id="password_change">
+            <span>Password Security</span>
+        </div>
+        <div id="watch_history">
+            <span>History</span>
+        </div>
+        <div id="information_change">
+            <span>Change Information</span>
+        </div>
+        <div id="follow">
+            <span>Follower</span>
+        </div>
+        <div id="followed">
+            <span>Followed</span>
+        </div>
+        <div id="contribution">
+            <span>Contribution</span>
+        </div>
+    </div>
+
+    <div class="right_container">
+        <div id="info">
+            <p>{{info.username}}</p>
+            <p>{{info.nickname}}</p>
+            <p>{{info.email}}</p>
+            <p>{{info.gender}}</p>
+
+        </div>
+
+
+        <div id="changePass" hidden>
+            <form id="form1" action="/private" method="POST">
+                <label for="pass">Password: </label>
+                <input type="text" name="password" id="pass" value={{password}}>
+                <button type="submit">submit</button>
+            </form>
+        </div>
+
+        <div id="changeInfo" hidden>
+            <form id="form2" action="/private" method="POST">
+                <label for="email">E-mail:</label>
+                <input type="text" name="email" id="email" value={{email}}>
+                <label for="nick">nickname:</label>
+                <input type="text" name="email" id="nick" value={{nickname}}>
+                <button type="submit">submit</button>
+            </form>
+        </div>
+
+        <div id="his" hidden>
+            {{#if history}}
+            <ul id="his_list">
+                {{#each history}}
+                <li>
+                    <p>
+                        {{history.title}}
+                    </p>
+                    <p>
+                        {{history.author}}
+                    </p>
+                    <p>
+                        {{history.lastWatch}}
+                    </p>
+                </li>
+                {{/each}}
+            </ul>
+            {{else}}
+            <p>No history</p>
+            {{/if}}
+        </div>
+
+        <div id="fol" hidden>
+            {{#if follower}}
+            <ul id="follow_list">
+                {{#each follower}}
+                <li>
+                    {{follower.nickname}}
+                </li>
+                {{/each}}
+            </ul>
+            {{else}}
+            <p> No followers</p>
+            {{/if}}
+        </div>
+
+        <div id="foled" hidden>
+            {{#if followed}}
+            <ul id="followed_list">
+                {{#each followed}}
+                <li>
+                    {{followed.nickname}}
+                </li>
+                {{/each}}
+            </ul>
+            {{else}}
+            <p> No ones you followed</p>
+            {{/if}}
+
+
+        </div>
+
+        <div id="contri" hidden>
+            {{#if contri}}
+            <ul id="contri_list">
+                {{#each contri}}
+                <li>
+                    <a href="/video/{{contri._id}}">
+                        {{contri.title}}
+                    </a>
+                </li>
+                {{/each}}
+            </ul>
+            {{else}}
+            <p>No contribution</p>
+            {{/if}}
+        </div>
+
+        <div id="err" class="alert alert-danger errorMsg" hidden>Please provide valid input</div>
+    </div>
+</div>
+    </main>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"
+        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+        integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+        crossorigin="anonymous"></script>
+    
+    <script src='../../public/js/check.js'></script>
+    <script src="../../public/js/search.js"></script>
+    <script src='../../public/js/private.js'></script>
+
+    <footer class="team_info">
+        Team2
+    </footer>
+</body>
