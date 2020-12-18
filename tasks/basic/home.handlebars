@@ -1,0 +1,57 @@
+<body>
+    <main>
+        <div class="header">
+            <div class="homeLogo"> <img src="../../public/img/h_slogan.png" alt="video-sharing-platform"></div>
+            <div class="search_container">
+                <form action="/search" method="POST" class="search" id="searchForm">
+                    <label for="searchText">Search video:</label>
+                    <input type="text" name="searchTerm" placeholder="Search Term" value="{{searchTerm}}"
+                        class="full-width-input" id="searchText" />
+                    <button type="submit">Search</button>
+                </form>
+                <div id="err" class="alert alert-danger errorMsg" hidden>Please type in valid search Term.</div>
+            </div>
+            <div class="nav_container">
+                <div id="about">
+                    <a href="about">about</a>
+                </div>
+
+                <div id="private" hidden>
+                    <a href="private" name="nickname">Hello, {{nickname}}</a>
+                </div>
+
+                <div id="login" class="login_container">
+                    <a href="login">login/signup</a>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="video_list_container">
+            {{#if data}}
+            {{#each data}}
+            <div id={{this._id}} class="video_elements">
+                <a href="video/{{this._id}}"><img src="" alt=""></a>
+                <a href="video/{{this._id}}"> {{this.title}} </a>
+                <p>playedNum: {{this.playedNum}}</p>
+            </div>
+            {{/each}}
+            {{else}}
+            <p class="not-found">We're sorry, but no results were found for.</p>
+            {{/if}}
+        </div>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"
+        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+        integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+        crossorigin="anonymous"></script>
+
+    <script src='../../public/js/check.js'></script>
+    <script src="../../public/js/search.js"></script>
+
+    <footer class="team_info">
+        Team2
+    </footer>
+</body>
