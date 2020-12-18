@@ -5,11 +5,14 @@ const bcrypt = require('bcrypt');
 
 router.get('/', async (req, res) => {
     try {
-        if (req.session.user) return res.redirect('/private');
-        const body = {
-            title: 'login',
-        };
-        res.render('login/login', body);
+        let body = {title: 'login'};
+
+        if (req.session.user) {
+            
+            return res.redirect('/');
+        }
+        
+        res.render('users/login', {data:body});
     } catch (error) {
         res.status(500).render("error", {
             title: "Error",
@@ -19,39 +22,45 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.post('/login', async (req, res) => {
+router.post('/', async (req, res) => {
     //set cookie here
     try {
         const username = req.body.username.toLowerCase();
         const password = req.body.password;
         let isAuth = false;
         let userID;
-        if (!username) return res.status(401).render('login/login', {
+        let nickname;
+
+        if (!username) return res.status(401).render('error', {
             title: "login",
+            status: 401,
             error: "Provided username or password is not valid."
         });
-        if (!password) return res.status(401).render('login/login', {
+        if (!password) return res.status(401).render('error', {
             title: "login",
+            status: 401,
             error: "Provided username or password is not valid."
         });
-        for (let i = 0; i < users.length; i++) {
-            if (users[i].username === username) {
-                if (await bcrypt.compare(password, users[i].hashedPassword)) {
-                    isAuth = true;
-                    userID = users[i]._id;
-                }
+
+        const user = await users.getByName(username);
+
+        if(user){
+            if (await bcrypt.compare(password, user.password)) {
+                isAuth = true;
+                userID = user._id;
+                nickname = user.nickname;
             }
         }
 
         if (isAuth) {
             req.session.user = {
-                firstName: users[userID].firstName,
-                lastName: users[userID].lastName,
+                nickname: nickname,
                 userID: userID
             };
-            res.redirect('/private');
-        } else res.status(401).render('login/login', {
+            res.redirect('/');
+        } else res.status(401).render('error', {
             title: "login",
+            status: 401,
             error: "Provided username or password is not valid."
         });
     } catch (error) {
@@ -72,7 +81,27 @@ router.get('/logout', async (req, res) => {
         let body = {
             title: "logout"
         };
-        res.render("logout/logout", body);
+        res.redirect("/", body);
+    } catch (error) {
+        res.status(500).render("error", {
+            title: "Error",
+            status: 500,
+            msg: error
+        });
+    }
+});
+
+router.get('/status', async (req, res) => {
+    try {
+        let body = {login: false};
+
+        if (req.session.user) {
+            
+            body.login = true;
+        }
+
+        res.json(body);
+
     } catch (error) {
         res.status(500).render("error", {
             title: "Error",
