@@ -2,14 +2,20 @@
 Final Project for CS-546: Web Programming.
 
 @Group3 2020 Fall.
+
 Group member:
+
 Fangji Liang
+
 Danping Cai
+
 Yu Zhou
+
 Arham Kazi
 
 
 Notice:
+
 1.This project is basiclly tested on "Google Chrome", We highly recommand you run this project on the same browser.
 
 2.The seed file in tasks directory is the basic database to run this project, 
